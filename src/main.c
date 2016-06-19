@@ -9,7 +9,7 @@ clock_t inicio_cpu;
 time_t inicio_time;
 void iniciar_cronometro(char* msg)
 {
-  printf("\n\n********************\nMedindo tempo: %s\n", msg);
+  printf("\n\n\n\n********************\nMedindo tempo: %s\n", msg);
   inicio_time = time(NULL);
   inicio_cpu = clock();
 }
@@ -19,7 +19,7 @@ void parar_cronometro(char* msg)
   clock_t fim_cpu = (clock()-inicio_cpu);
   time_t fim_time = time(NULL) - inicio_time;
 
-  printf("Tempo da operacao:\nSegundos: %ld\nClock Ticks: %ld\n%s\n*******************\n\n", fim_time, fim_cpu, msg);
+  printf("Tempo da operacao:\nSegundos: %ld\nClock Ticks: %ld\n%s\n*******************\n\n\n\n", fim_time, fim_cpu, msg);
 }
 
 BTree* inicializar_arvore(FILE* pf, int* ordem) {
@@ -51,14 +51,25 @@ void opcao_imprimir(BTree* a) {
   printf("0 1 2 3 4 5 6 7 8 9\n");
 }
 
-void opcao_inserir(BTree* a) {
+void opcao_remover(BTree** a)
+{
+  int valor;
+  printf("Entre com um valor inteiro:\n=> ");
+  scanf("%d", &valor);
+
+  iniciar_cronometro("Removendo Elemento");
+  (*a) = bt_remove((*a), valor);
+  parar_cronometro("Removendo Elemento [Concluido]\n\n\n\n");
+}
+
+void opcao_inserir(BTree** a) {
   int valor;
   printf("Entre com um valor inteiro:\n=> ");
   scanf("%d", &valor);
 
   iniciar_cronometro("Inserindo Elemento");
-  bt_insert(a, valor);
-  parar_cronometro("Inserindo Elemento [Concluido]");
+  (*a) = bt_insert((*a), valor);
+  parar_cronometro("Inserindo Elemento [Concluido]\n\n\n\n");
 }
 
 void entrar_modo_operacoes(BTree* a) {
@@ -70,10 +81,10 @@ void entrar_modo_operacoes(BTree* a) {
 
     switch(opcao) {
       case 1:
-        opcao_inserir(a);
+        opcao_inserir(&a);
         break;
       case 2:
-        printf("Nao implementado.\n");
+        opcao_remover(&a);
         break;
       case 3:
         opcao_imprimir(a);
