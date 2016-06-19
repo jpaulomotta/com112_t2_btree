@@ -54,7 +54,7 @@ void bt_destroy (BTree* a) {
   int i;
   if (!isleaf(a)) {
     for (i = 0; i <= a->n; ++i)
-    bt_destroy(a->p[i]);
+      bt_destroy(a->p[i]);
   }
   free(a);
 }
@@ -123,7 +123,8 @@ BTree* bt_insert (BTree* a, int x) {
   if(overflow(a)) {
     int m;
     BTree* b = split(a,&m);
-    BTree* r = bt_create(a->ordem); r->k[0] = m;
+    BTree* r = bt_create(a->ordem);
+    r->k[0] = m;
     r->p[0] = a;
     r->p[1] = b;
     r->n = 1;
@@ -155,4 +156,20 @@ void bt_print (BTree* a, int indent)
       bt_print(a->p[i],indent+2);
     }
   }
+}
+
+
+unsigned long long bt_size_memory(BTree* a)
+{
+  int i;
+  if(!isleaf(a)) {
+    long long size_no = 0;
+    for (i = 0; i <= a->n; ++i)
+    {
+       size_no += bt_size_memory(a->p[i]);
+    }
+    return size_no;
+  }
+
+  return sizeof(a) + (sizeof(int) * a->ordem) + (sizeof(BTree*) * (a->ordem+1));
 }

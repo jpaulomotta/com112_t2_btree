@@ -9,7 +9,7 @@ clock_t inicio_cpu;
 time_t inicio_time;
 void iniciar_cronometro(char* msg)
 {
-  printf("Medindo tempo: %s\n", msg);
+  printf("\n\n********************\nMedindo tempo: %s\n", msg);
   inicio_time = time(NULL);
   inicio_cpu = clock();
 }
@@ -19,7 +19,7 @@ void parar_cronometro(char* msg)
   clock_t fim_cpu = (clock()-inicio_cpu);
   time_t fim_time = time(NULL) - inicio_time;
 
-  printf("Tempo da operacao:\nSegundos: %ld\nClock Ticks: %ld\n%s\n\n", fim_time, fim_cpu, msg);
+  printf("Tempo da operacao:\nSegundos: %ld\nClock Ticks: %ld\n%s\n*******************\n\n", fim_time, fim_cpu, msg);
 }
 
 BTree* inicializar_arvore(FILE* pf, int* ordem) {

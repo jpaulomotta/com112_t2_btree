@@ -11,4 +11,6 @@ BTree* bt_insert (BTree* a, int x);
 BTree* bt_remove (BTree* a, int x);
 void bt_print (BTree* a, int indent);
 
+unsigned long long bt_size_memory(BTree* a);
+
 #endif
