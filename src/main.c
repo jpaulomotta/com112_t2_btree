@@ -52,14 +52,20 @@ void opcao_imprimir(BTree* a) {
 }
 
 void opcao_inserir(BTree* a) {
+  int valor;
+  printf("Entre com um valor inteiro:\n=> ");
+  scanf("%d", &valor);
 
+  iniciar_cronometro("Inserindo Elemento");
+  bt_insert(a, valor);
+  parar_cronometro("Inserindo Elemento [Concluido]");
 }
 
 void entrar_modo_operacoes(BTree* a) {
   int opcao;
 
   do {
-    printf("Menu de Operacoes\n===================\n\n1. Inserir elemento\n2. Remover elemento\n3. Imprimir\n4. Sair\n=>");
+    printf("Menu de Operacoes\n===================\n\n1. Inserir elemento\n2. Remover elemento\n3. Imprimir\n4. Sair\n=> ");
     scanf("%d", &opcao);
 
     switch(opcao) {
@@ -71,6 +77,7 @@ void entrar_modo_operacoes(BTree* a) {
         break;
       case 3:
         opcao_imprimir(a);
+        break;
       case 4:
         return;
     }
